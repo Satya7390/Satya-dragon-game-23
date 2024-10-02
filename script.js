@@ -10,24 +10,26 @@ audiogo = new Audio('gameover.mp3');
 setTimeout(() => {
     audio.play()
 }, 1000);
+
 document.onkeydown = function (e) {
-    console.log("Key code is: ", e.keyCode)
-    if (e.keyCode == 38) {
-        dino = document.querySelector('.dino');
+    console.log("Key code is: ", e.keyCode);
+    if (e.keyCode == 38 && !dino.classList.contains('animateDino')) { // Added check for jump
         dino.classList.add('animateDino');
         setTimeout(() => {
-            dino.classList.remove('animateDino')
+            dino.classList.remove('animateDino');
         }, 700);
     }
     if (e.keyCode == 39) {
-        dino = document.querySelector('.dino');
-        dinoX = parseInt(window.getComputedStyle(dino, null).getPropertyValue('left'));
-        dino.style.left = dinoX + 112 + "px";
+        let dinoX = parseInt(window.getComputedStyle(dino, null).getPropertyValue('left'));
+        if (dinoX < window.innerWidth - 100) { // Prevent moving off screen
+            dino.style.left = dinoX + 112 + "px";
+        }
     }
     if (e.keyCode == 37) {
-        dino = document.querySelector('.dino');
-        dinoX = parseInt(window.getComputedStyle(dino, null).getPropertyValue('left'));
-        dino.style.left = (dinoX - 112) + "px";
+        let dinoX = parseInt(window.getComputedStyle(dino, null).getPropertyValue('left'));
+        if (dinoX > 0) { // Prevent moving off screen
+            dino.style.left = (dinoX - 112) + "px";
+        }
     }
 }
 
