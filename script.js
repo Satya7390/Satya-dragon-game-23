@@ -1,6 +1,10 @@
 score = 0;
 cross = true;
 
+let dino = document.querySelector('.dino');
+let gameOver = document.querySelector('.gameOver');
+let obstacle = document.querySelector('.obstacle');
+
 audio = new Audio('music.mp3');
 audiogo = new Audio('gameover.mp3');
 setTimeout(() => {
